@@ -9,6 +9,17 @@ class polynom():
 	def deg(self):
 		return len(self)-1
 	
+	def __iter__(self):
+		self.counter = 0
+		return self
+	def __next__(self):
+		if self.counter == len(self):
+			del self.counter
+			raise StopIteration
+		else:
+			self.counter += 1
+			return self[self.counter-1]
+	
 	def __getitem__(self,i):
 		if type(i) != slice:
 			return self.c[i] if i <= self.deg() else 0
@@ -17,7 +28,6 @@ class polynom():
 			for j in range(i.start,i.stop,(i.step if i.step != None else 1)):
 				res.append(j)
 			return res
-		
 	def __len__(self):
 		return len(self.c)
 		
@@ -54,7 +64,6 @@ class polynom():
 		return self+other*(-1)	
 	def __rsub__(self,other):
 		return (-1)*self+other
-		
 	def __neg__(self):
 		return self*(-1)
 		
@@ -90,3 +99,6 @@ class polynom():
 a = polynom([0,6,4,8])
 b = polynom([4,2])
 print(a,a+b,a*b)
+for i in a:
+	print(i,a.counter)
+print(a.counter)
