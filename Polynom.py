@@ -27,8 +27,8 @@ class polynom():
 		for i in range(len(self)):
 			if self[i] == 0:
 				continue
-			res += '' if i == 0 or self[i] < 0 else '+'
-			res += str(self[i]) if self[i] != 1 or i == 0 else ''
+			res += '-' if self[i] < 0 else '' if i == 0 else '+'
+			res += str(abs(self[i])) if abs(self[i]) != 1 or i == 0 else ''
 			res += 'x' if i != 0 else ''
 			res += '^'+str(i) if i != 0 and i != 1 else '' 
 		return res
